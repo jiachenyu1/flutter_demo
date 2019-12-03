@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           backgroundColor: Colors.white,
           brightness: Brightness.light),
-      body: Column(
+      body: ListView(
         children: <Widget>[
           Image.asset('images/banner.png'),
           HomeIconWrap(
@@ -68,8 +68,8 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               HomeIcon(url: 'images/there_order@2x.png', text: '现场拍1'),
               HomeIcon(url: 'images/there_order@2x.png', text: '现场拍2'),
-              HomeIcon(url: 'images/there_order@2x.png', text: '现场拍'),
-              HomeIcon(url: 'images/there_order@2x.png', text: '现场拍'),
+              HomeIcon(url: 'images/there_order@2x.png', text: '现场拍3'),
+              HomeIcon(url: 'images/there_order@2x.png', text: '现场拍4'),
               HomeIcon(url: 'images/there_order@2x.png', text: '现场拍'),
               HomeIcon(url: 'images/there_order@2x.png', text: '现场拍'),
             ],
@@ -105,26 +105,36 @@ class HomeIconWrap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: new EdgeInsets.only(
-              left: ScreenUtil().setWidth(30),
-              top: ScreenUtil().setWidth(45),
-              bottom: ScreenUtil().setWidth(70)),
-          child: Text(
-            this.title,
-            style: TextStyle(
-              fontSize: ScreenUtil().setSp(32),
-              fontWeight: FontWeight.bold,
+    return Container(
+        decoration: BoxDecoration(
+            border: Border(
+                bottom: BorderSide(
+                    width: ScreenUtil().setWidth(20),
+                    color: Color.fromRGBO(245, 245, 249, 1)))),
+        padding: new EdgeInsets.only(bottom: ScreenUtil().setWidth(60)),
+        child: (Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: new EdgeInsets.only(
+                  left: ScreenUtil().setWidth(30),
+                  top: ScreenUtil().setWidth(45),
+                  bottom: ScreenUtil().setWidth(70)),
+              child: Text(
+                this.title,
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(32),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-          ),
-        ),
-        Row(children: this.children)
-      ],
-    );
+            Wrap(
+              children: this.children,
+              runSpacing: ScreenUtil().setWidth(60),
+            )
+          ],
+        )));
   }
 }
 
@@ -136,27 +146,25 @@ class HomeIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: (Container(
-            width: ScreenUtil.screenWidthDp / 4,
-            child: Column(
-              children: <Widget>[
-                Container(
-                  padding:
-                      new EdgeInsets.only(bottom: ScreenUtil().setWidth(40)),
-                  child: Image.asset(this.url),
-                  width: ScreenUtil().setWidth(128),
-                  height: ScreenUtil().setWidth(128),
-                ),
-                Text(
-                  this.text,
-                  style: TextStyle(
-                    color: Color.fromRGBO(178, 185, 195, 1),
-                    fontSize: ScreenUtil().setSp(26),
-                  ),
-                  textAlign: TextAlign.center,
-                )
-              ],
-            ))));
+    return Container(
+        width: ScreenUtil.screenWidthDp / 4,
+        child: Column(
+          children: <Widget>[
+            Container(
+              padding: new EdgeInsets.only(bottom: ScreenUtil().setWidth(40)),
+              child: Image.asset(this.url),
+              width: ScreenUtil().setWidth(128),
+              height: ScreenUtil().setWidth(128),
+            ),
+            Text(
+              this.text,
+              style: TextStyle(
+                color: Color.fromRGBO(178, 185, 195, 1),
+                fontSize: ScreenUtil().setSp(26),
+              ),
+              textAlign: TextAlign.center,
+            )
+          ],
+        ));
   }
 }
