@@ -90,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
               HomeIcon(url: 'images/there_order@2x.png', text: '现场拍'),
             ],
           ),
+          SliderView()
         ],
       ),
     );
@@ -166,5 +167,142 @@ class HomeIcon extends StatelessWidget {
             )
           ],
         ));
+  }
+}
+
+class SliderView extends StatelessWidget {
+  SliderView({Key key, this.carName}) : super(key: key);
+
+  final String carName;
+
+  Widget renderButton(String text) {
+    return Container(
+      width: ScreenUtil().setWidth(286),
+      height: ScreenUtil().setWidth(70),
+      alignment: Alignment(0, 0),
+      decoration: BoxDecoration(
+          color: Color.fromRGBO(36, 134, 214, 1),
+          borderRadius: BorderRadius.circular(ScreenUtil().setWidth(4))),
+      child: GestureDetector(
+        child: Text(
+          text,
+          style: TextStyle(
+              fontSize: ScreenUtil().setSp(30),
+              color: Color.fromRGBO(255, 255, 255, 1)),
+        ),
+        onTap: () => {},
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var TextStyle1 = TextStyle(
+        fontSize: ScreenUtil().setSp(26),
+        color: Color.fromRGBO(163, 166, 167, 1));
+    var TextStyle2 = TextStyle(
+        fontSize: ScreenUtil().setSp(26),
+        color: Color.fromRGBO(67, 165, 242, 1));
+    return Container(
+      width: ScreenUtil().setWidth(654),
+      padding: EdgeInsets.only(
+          top: ScreenUtil().setWidth(20),
+          right: ScreenUtil().setWidth(30),
+          left: ScreenUtil().setWidth(30),
+          bottom: ScreenUtil().setWidth(30)),
+      decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+                color: Color.fromRGBO(0, 0, 0, 0.15),
+                offset: Offset(0, 0),
+                blurRadius: ScreenUtil().setWidth(12),
+                spreadRadius: 0)
+          ],
+          color: Color.fromRGBO(255, 255, 255, 1),
+          borderRadius: BorderRadius.circular(ScreenUtil().setWidth(10))),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(bottom: ScreenUtil().setWidth(28)),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  width: ScreenUtil().setWidth(80),
+                  height: ScreenUtil().setWidth(34),
+                  decoration: BoxDecoration(
+                      color: Color.fromRGBO(245, 245, 249, 1),
+                      borderRadius:
+                          BorderRadius.circular(ScreenUtil().setWidth(4))),
+                  alignment: Alignment(0, 0),
+                  child: Text(
+                    '流拍',
+                    style: TextStyle(
+                        fontSize: ScreenUtil().setSp(20),
+                        color: Color.fromRGBO(99, 104, 106, 1)),
+                  ),
+                ),
+                Row(
+                  children: <Widget>[
+                    Text(
+                      '未处理计时',
+                      style: TextStyle1,
+                    ),
+                    Text(
+                      '23',
+                      style: TextStyle2,
+                    ),
+                    Text(
+                      '时',
+                      style: TextStyle1,
+                    ),
+                    Text(
+                      '59',
+                      style: TextStyle2,
+                    ),
+                    Text(
+                      '分',
+                      style: TextStyle1,
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: ScreenUtil().setWidth(40)),
+              child: Text(
+            '大众 迈腾 2007款 1.8T 自动 豪华型... ',
+            style: TextStyle(
+                fontSize: ScreenUtil().setSp(30),
+                color: Color.fromRGBO(41, 43, 47, 1)),
+          )),
+          Padding(
+            padding: EdgeInsets.only(bottom: ScreenUtil().setWidth(20)),
+            child: Text(
+              '京RT5677 | VIN：J21123498381',
+              style: TextStyle(
+                  fontSize: ScreenUtil().setSp(26),
+                  color: Color.fromRGBO(163, 166, 167, 1)),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: ScreenUtil().setWidth(50)),
+            child: Text(
+              '请决定要退车还是申请再拍',
+              style: TextStyle(
+                  fontSize: ScreenUtil().setSp(26),
+                  color: Color.fromRGBO(163, 166, 167, 1)),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[renderButton('联系卖家'), renderButton('查看详情')],
+          )
+        ],
+      ),
+    );
   }
 }
