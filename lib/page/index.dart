@@ -2,6 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import '../routes/application.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -62,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
           brightness: Brightness.light),
       body: ListView(
         children: <Widget>[
+//          CarouselSlider(child:HomeIcon(url: 'images/there_order@2x.png', text: '现场拍6')),
           Image.asset('images/banner.png'),
           HomeIconWrap(
             title: '现场拍',
@@ -90,7 +92,36 @@ class _MyHomePageState extends State<MyHomePage> {
               HomeIcon(url: 'images/there_order@2x.png', text: '现场拍'),
             ],
           ),
-          SliderView()
+//        CarouselSlider(child: [SliderView(), SliderView(), SliderView()])
+//          CarouselSlider(
+//            viewportFraction: 0.8,
+//              aspectRatio: 16/9,
+//            height: ScreenUtil().setWidth(410),
+//            items: [1,2,3,4,5].map((i) {
+//              return Builder(
+//                builder: (BuildContext context) {
+//                  return SliderView();
+//                },
+//              );
+//            }).toList(),
+//          )
+          CarouselSlider(
+            height: 400.0,
+            items: [1,2,3,4,5].map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      decoration: BoxDecoration(
+                          color: Colors.amber
+                      ),
+                      child: Text('text $i', style: TextStyle(fontSize: 16.0),)
+                  );
+                },
+              );
+            }).toList(),
+          )
         ],
       ),
     );
@@ -177,7 +208,7 @@ class SliderView extends StatelessWidget {
 
   Widget renderButton(String text) {
     return Container(
-      width: ScreenUtil().setWidth(286),
+      width: ScreenUtil().setWidth(256),
       height: ScreenUtil().setWidth(70),
       alignment: Alignment(0, 0),
       decoration: BoxDecoration(
@@ -197,14 +228,15 @@ class SliderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var TextStyle1 = TextStyle(
+    var textStyle1 = TextStyle(
         fontSize: ScreenUtil().setSp(26),
         color: Color.fromRGBO(163, 166, 167, 1));
-    var TextStyle2 = TextStyle(
+    var textStyle2 = TextStyle(
         fontSize: ScreenUtil().setSp(26),
         color: Color.fromRGBO(67, 165, 242, 1));
     return Container(
-      width: ScreenUtil().setWidth(654),
+      width: MediaQuery.of(context).size.width,
+      margin: new EdgeInsets.symmetric(horizontal: 5.0),
       padding: EdgeInsets.only(
           top: ScreenUtil().setWidth(20),
           right: ScreenUtil().setWidth(30),
@@ -248,23 +280,23 @@ class SliderView extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       '未处理计时',
-                      style: TextStyle1,
+                      style: textStyle1,
                     ),
                     Text(
                       '23',
-                      style: TextStyle2,
+                      style: textStyle2,
                     ),
                     Text(
                       '时',
-                      style: TextStyle1,
+                      style: textStyle1,
                     ),
                     Text(
                       '59',
-                      style: TextStyle2,
+                      style: textStyle2,
                     ),
                     Text(
                       '分',
-                      style: TextStyle1,
+                      style: textStyle1,
                     )
                   ],
                 )

@@ -1,37 +1,57 @@
 import 'package:flutter/material.dart';
 
 class Detail extends StatelessWidget {
-  Detail({Key key, this.title}) : super(key: key);
+  build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.0),
+      child: FlutterLogo(),
+    );
+  }
+}
 
-  final String title;
+class GrowTransition extends StatelessWidget {
+  GrowTransition({this.child, this.animation});
+
+  final Widget child;
+  final Animation<double> animation;
+
+  Widget build(BuildContext context) {
+    return Center(
+      child: AnimatedBuilder(
+          animation: animation,
+          builder: (BuildContext context, Widget child) {
+            return Container(
+                height: animation.value, width: animation.value, child: child);
+          },
+          child: child),
+    );
+  }
+}
+
+class AnimScreen extends StatefulWidget {
+  @override
+  _AnimState createState() => _AnimState();
+}
+
+class _AnimState extends State<AnimScreen> with SingleTickerProviderStateMixin {
+  Animation<double> animation;
+  AnimationController controller;
 
   @override
+  initState() {
+    super.initState();
+    controller = AnimationController(
+        duration: const Duration(milliseconds: 2000), vsync: this);
+    animation = Tween(begin: 0.0, end: 300.0).animate(controller);
+    controller.forward();
+  }
+
   Widget build(BuildContext context) {
-    print(this.title);
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-          elevation: 0, brightness: Brightness.light, title: Text(this.title)),
-      body: Container(
-        width: 100,
-        height: 100,
-        color: Color.fromRGBO(0, 0, 0, 1),
-        child: (Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                width: 20,
-                height: 20,
-                color: Color.fromRGBO(100, 100, 100, 1),
-              ),
-              Container(
-                width: 20,
-                height: 20,
-                color: Color.fromRGBO(150, 150, 150, 1),
-              ),
-            ])),
-      ),
-    );
+    return GrowTransition(child: Detail(), animation: animation);
+  }
+
+  dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }

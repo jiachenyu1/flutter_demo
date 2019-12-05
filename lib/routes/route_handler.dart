@@ -6,6 +6,6 @@ var detailsHandler = new Handler(
     handlerFunc: (BuildContext context,Map<String,List<String>> params){
         String title = params['title'].first;
         print('index>details goodsID is ${title}');
-        return Detail(title: title);
+        return Detail();
     }
 );
